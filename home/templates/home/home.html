@@ -1,0 +1,61 @@
+<!--Extend by base.html file which means we can include the file in base file between  {block} {endblock}-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/home_style.css' %}"/>
+
+<div class="container">
+	<div class="row">
+
+		<!-- blog feed -->
+		<div class="left-column col-lg-7 offset-lg-1">
+
+			<!-- Top 'create post' bar -->
+			<div class="d-lg-none mb-3">
+				<div class="card m-auto d-flex flex-column p-3">
+					<img class="img-fluid d-block m-auto pb-2" src="{% static 'BlogpostLogo.png' %}" width="90" height="90">
+					<p class="lead">With this tool (website) you can create, edit and delete your own blogs also view blogs from all the world in any category you want to read in. built in Django framework,
+                        which is a powerful framework for back-end.</p>
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blogpost:create' %}">Create post</a></p>
+				</div>
+			</div>
+			<!-- end Top 'create post' bar -->
+
+			<!-- Blog posts-->
+        {% if posts %}
+			{% for post in posts %}
+				<div class="blog-post-container">
+					{% include 'blogPost/snippets/blog_post_snippet.html' with blog_post=post %}
+				</div>
+			{% endfor %}
+        {% else %}
+            <div class="blog-post-container">
+                {% include  'blogPost/snippets/blog_post_snippet.html' with query=query %}
+            </div>
+        {% endif %}
+		<!-- End Blog posts-->
+        <!-- Pagination -->
+        {% include 'blogPost/snippets/blog_post_pagination_snippet.html' with blog_posts=posts %}
+		</div>
+		<!-- end blog feed -->
+
+
+
+		<!-- Right 'create post' column  -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+
+			<div class="card create-post-bar d-flex flex-column p-3">
+				<img class="img-fluid d-block m-auto pb-2" src="{% static 'BlogpostLogo.png' %}" width="90" height="90">
+					<p class="lead">With this tool (website) you can create, edit and delete your own blogs also view blogs from all the world in any category you want to read in. built in Django framework,
+                        which is a powerful framework for back-end.</p>
+				<p class="m-auto"><a class="btn btn-primary" href="{% url 'blogpost:create' %}">Create post</a></p>
+			</div>
+
+		</div>
+		<!-- end Right 'create post' column  -->
+
+	</div>
+</div>
+
+{% endblock content %}

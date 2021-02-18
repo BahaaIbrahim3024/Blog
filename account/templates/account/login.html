@@ -1,0 +1,38 @@
+{% include 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'account/styles/account_style.css' %}"/>
+
+
+  <main class="form-signin col-4 d-flex justify-content-center">
+  <form method="post" >
+      {% csrf_token %}
+    <img class="mb-4 m-auto" src="{% static 'account/images/log1.png' %} " alt="" width="150" height="150" style="alignment-baseline: center;">
+    <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      {% for field in login_form %}
+          {% for error in  field.errors %}
+              <p style="color: red;">{{ error }}</p>
+          {% endfor %}
+      {% endfor %}
+      {% if login_form.non_field_errors %}
+          <div style="color: red;">
+              <p>{{ login_form.non_field_errors }}</p>
+          </div>
+      {% endif %}
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+  </form>
+</main>
+
+<div class="d-flex flex-column">
+      <a class="m-auto" href="{% url 'password_reset' %}"> Forget Password</a>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block  content %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'account/styles/account_style.css' %}"/>
+
+
+  <main class="form-signin col-4 d-flex justify-content-center">
+  <form method="post" >
+      {% csrf_token %}
+    <img class="mb-4 m-auto" src="{% static 'account/images/register2.png' %}" alt="" width="150" height="150">
+    <h1 class="h3 mb-3 fw-normal">Register Account</h1>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required >
+    <input type="text" name="first_name" id="inputFirstname" class="form-control" placeholder="First Name" required >
+    <input type="text" name="last_name" id="inputLastname" class="form-control" placeholder="Last Name" required >
+    <input type="number" name="age" id="inputAge" class="form-control" placeholder="Age" required >
+    <select title="gender" name="gender" id="inputGender" class="form-control"   required>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
+    </select>
+    <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+    <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm Password" required>
+
+      {% for field in registration_form %}
+          {% for error in  field.errors %}
+              <p style="color: red;">{{ error }}</p>
+          {% endfor %}
+      {% endfor %}
+      {% if registration_form.non_field_errors %}
+          <div style="color: red;">
+              <p>{{ registration_form.non_field_errors }}</p>
+          </div>
+      {% endif %}
+
+    <button type="submit" class="w-100 btn btn-lg btn-primary" >Register</button>
+  </form>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+    <html lang=en>
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% include  'snippets/header.html'%}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/bais_style.css' %}"/>
+
+    </head>
+
+    <body>
+            <!-- Body -->
+            <!-- This for make suer that the footer will always set at the bottom -->
+            <div class="main">
+            <!--Include Content of home.html file-->
+                {% block content %}
+
+                {% endblock content %}
+            </div>
+            <div class="fixed-bottom sticky-bottom">
+                <div>
+                    <footer>
+                        {% include  'snippets/footer.html'%}
+                    </footer>
+                </div>
+            </div>
+    </body>
+
+</html>
