@@ -4,7 +4,8 @@
     your Own posts and review others blogs, make a favorite blogs list.
     Also there's API for the project using REST Framework.
     using django framework as back-end.
-  ### * Operations 
+
+## * Operations 
         1- Building a custom User and Admin panel for Register, update, authenticate, delete users. 
             I- Also change password & reset it.
             II- User authentication via Django "TokenAuthentication".
