@@ -21,11 +21,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from account.views import must_authenticate_view
 urlpatterns = [
+    # Basic urls
     path('', home_screen_view, name="home"),
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('blog/', include('blogPost.urls', namespace='blogPost')),
     path('must_authenticate/', must_authenticate_view, name='must_authenticate'),
+
+    # APIs URLs
+    path('api/blog/', include('blogPost.api.urls', namespace='blog_api')),
 
 
     # Password reset links

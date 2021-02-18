@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'blogPost.apps.BlogpostConfig',
     'home.apps.HomeConfig',
+    # REST API
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
