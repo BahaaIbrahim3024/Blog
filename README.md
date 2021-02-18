@@ -1,4 +1,9 @@
 # Blog
+## * Overview
+    This website for blog posts you can create, read, edit, delete (CRUD Operations) 
+    your Own posts and review others blogs, make a favorite blogs list.
+    Also there's API for the project using REST Framework.
+    using django framework as back-end.
 
 ## * How to run
   - Open requirements.txt file and install all required libraries.
