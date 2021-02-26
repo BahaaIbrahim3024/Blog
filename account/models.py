@@ -1,5 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
+
 # Create your models here.
 
 GENDERS = [('M', 'Male'), ('F', 'Female'), ('O', 'Other')]
@@ -52,12 +57,12 @@ class MyAccountManager(BaseUserManager):
 
 # Create a custom user model
 class Account(AbstractBaseUser):
-    email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    username = models.CharField(max_length=30, unique=True)
-    first_name = models.CharField(verbose_name='first name', max_length=40)
-    last_name = models.CharField(verbose_name='last name', max_length=40)
-    age = models.IntegerField(verbose_name='age', null=True)
-    gender = models.CharField(max_length=1, choices=GENDERS)
+    email = models.EmailField(verbose_name="email", max_length=60, unique=True, blank=True)
+    username = models.CharField(max_length=30, unique=True, blank=True)
+    first_name = models.CharField(verbose_name='first name', max_length=40, blank=True)
+    last_name = models.CharField(verbose_name='last name', max_length=40, blank=True)
+    age = models.IntegerField(verbose_name='age', null=True, blank=True)
+    gender = models.CharField(max_length=1, verbose_name='gender', choices=GENDERS, blank=True)
     date_join = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     is_admin = models.BooleanField(default=False)
@@ -74,7 +79,7 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'age', 'gender']
 
     def __str__(self):
-        return str(self.email)+" , "+str(self.username)
+        return str(self.username)
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
@@ -85,3 +90,10 @@ class Account(AbstractBaseUser):
     class Meta:
         verbose_name = 'Account'
         verbose_name_plural = 'All Accounts'
+
+
+# Generate Auth Token for every user register
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def generate_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)

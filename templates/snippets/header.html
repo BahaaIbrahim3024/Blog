@@ -7,29 +7,41 @@
   <p class="h5 my-0 me-md-auto fw-normal">
     {% if request.user.is_authenticated %}
         Hello, {{ request.user.username }}
+        <i class="fas fa-dragon" aria-hidden="true"></i>
     {% endif %}
   </p>
 
   <!-- Creat a search bar-->
   <div class="search-bar mt-sm-2 mr-2">
-      <form method="get">
-          <input class="form-control" type="text" name="q" id="id_q" placeholder="Search.... " value="{{ query }}">
+      <form onsubmit="return executeQuery();">
+          <input class="form-control" type="text" name="q" id="id_q" placeholder="Search.... " value="{{ query }}" >
       </form>
 
   </div>
+    <pre>    </pre>
   <nav class="my-2 my-md-0 me-md-3">
       {% if request.user.is_authenticated %}
-        <a class="p-2 text-dark" href="{% url 'home'%}">Home</a>
-        <a class="p-2 text-dark" href="{% url 'account:update' %}">Account</a>
-        <a class="p-2 text-dark" href="{% url 'account:logout' %}">Logout</a>
+          <a class="p-2 text-dark" href="{% url 'home'%}" style="text-decoration: none;"><i class="fas fa-home" aria-hidden="true"></i>  Home</a>
+        <a class="p-2 text-dark" href="{% url 'account:update' %}" style="text-decoration: none;"><i class="fas fa-user-ninja" aria-hidden="true"></i>   Account</a>
+        <a class="p-2 text-dark" href="{% url 'account:logout' %}" style="text-decoration: none;"><i class="fas fa-power-off" aria-hidden="true"></i>  Logout</a>
       {% else %}
-          <a class="p-2 text-dark" href="{% url 'home'%}">Home</a>
-          <a class="p-2 text-dark" href="{% url 'account:login' %}">Login</a>
-          <a class="btn btn-outline-primary" href="{% url 'account:register' %}">Register</a>
+          <a class="p-2 text-dark" href="{% url 'home'%}" style="text-decoration: none;"> <i class="fas fa-home" aria-hidden="true"></i>  Home</a>
+          <a class="p-2 text-dark" href="{% url 'account:login' %}" style="text-decoration: none;"><i class="fas fa-unlock-alt" aria-hidden="true"></i>  Login</a>
+          <a class="btn btn-outline-primary" href="{% url 'account:register' %}" style="text-decoration: none;"><i class="fas fa-user-plus" aria-hidden="true"></i>  Register</a>
       {% endif %}
   </nav>
 </div>
 
 <script type="text/javascript">
 	document.getElementById("id_q").value = "{{query}}"
+</script>
+
+<script>
+function executeQuery() {
+    var query = document.getElementById('id_q').value;
+    window.location.replace("http://127.0.0.1:8000/?q=" + query)
+    //"https://open-api.xyz/?q=" + query;  (if we are in production ENV)
+    return false
+}
+
 </script>

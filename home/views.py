@@ -14,22 +14,25 @@ def home_screen_view(request):
     context = {}
     # add query to home screen for search
     query = ""
-    if request.GET:
-        query = request.GET.get('q', '')
-        context['query'] = query
+    query = request.GET.get('q', '')
+    context['query'] = str(query)
+    #print("home_screen_view: " + str(query))
+
     # Sort all of blog posts by updated date
     posts = sorted(get_blog_queryset(query), key=attrgetter('date_updated'), reverse=True)
-    context['posts'] = posts
+    #context['posts'] = posts
 
     # Pagination
     page = request.GET.get('page', 1)
     blog_posts_paginator = Paginator(posts, BLOG_POST_PER_PAGE)
+
     try:
         posts = blog_posts_paginator.page(page)
     except PageNotAnInteger:
         posts = blog_posts_paginator.page(BLOG_POST_PER_PAGE)
     except EmptyPage:
         posts = blog_posts_paginator.page(blog_posts_paginator.num_pages)
+
     context['posts'] = posts
 
     return render(request, 'home/home.html', context)

@@ -13,7 +13,9 @@
 			<img class="card-img-top" src="{{blog_post.image.url}}">
 			<div class="card-body my-2">
 				<h2 class="card-title">{{blog_post.title}}</h2>
-				<p class="card-text">{{blog_post.body|linebreaksbr}}</p>
+                {% autoescape off %}
+				        <p class="card-text">{{blog_post.body|linebreaksbr}}</p>
+                {% endautoescape %}
                 <p>
 					{% if blog_post.author == request.user %}
 						<a href="{% url 'blogpost:update' blog_post.slug %}" class="btn btn-primary">Update</a>

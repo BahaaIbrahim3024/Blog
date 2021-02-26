@@ -7,6 +7,16 @@
 		padding: 20px;
 
 	}
+
+    .fa-heart {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+
+    .fa-heart.active {
+    color: #ff1026;
+}
 </style>
 
 {% if blog_post %}
@@ -22,9 +32,15 @@
 				<a style="text-decoration: none;" href="{% url 'blogPost:detail' post.slug %}">
 					<h2 class="card-title" >{{blog_post.title}}</h2>
 				</a>
-				<p class="card-text">{{blog_post.body|linebreaksbr|truncatechars:250}}</p>
+                {% autoescape off %}
+				    <p class="card-text">{{blog_post.body|linebreaksbr|truncatechars:250}}</p>
+                {% endautoescape %}
 				{% if blog_post.author == request.user %}
-					<a href="{% url 'blogPost:update' blog_post.slug %}" class="btn btn-primary">Update</a>
+					<a href="{% url 'blogPost:update' blog_post.slug %}" class="btn btn-primary"><i class="fas fa-pencil-alt" aria-hidden="true"></i>  Update</a>
+                    <a href="{% url 'blogPost:delete' blog_post.slug %}" class="btn btn-primary"><i class="fas fa-trash-alt" aria-hidden="true"></i>  </a>
+                    <a href="{% url 'blogPost:favorite' blog_post.slug %}" class="btn btn-primary"><i class="fas fa-heart {% if blog_post.isFavorite %}active{% endif %}"></i>  </a>
+                {% else %}
+                    <a href="{% url 'blogPost:favorite' blog_post.slug %}" class="btn btn-primary"><i class="fas fa-heart {% if blog_post.isFavorite %}{% endif %}"></i>  </a>
 				{% endif %}
 			</div>
 			<div class="card-footer text-muted">

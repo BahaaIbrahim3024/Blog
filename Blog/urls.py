@@ -20,6 +20,9 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from account.views import must_authenticate_view
+from rest_framework.urlpatterns import format_suffix_patterns
+
+
 urlpatterns = [
     # Basic urls
     path('', home_screen_view, name="home"),
@@ -30,6 +33,7 @@ urlpatterns = [
 
     # APIs URLs
     path('api/blog/', include('blogPost.api.urls', namespace='blog_api')),
+    path('api/account/', include('account.api.urls', namespace='account_api')),
 
 
     # Password reset links
@@ -51,6 +55,9 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
          name='password_reset_complete'),
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

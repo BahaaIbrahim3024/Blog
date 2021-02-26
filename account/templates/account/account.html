@@ -11,6 +11,17 @@
     <h1 class="h3 mb-3 fw-normal">Account</h1>
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value={{ account_form.initial.email }}>
     <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required value={{ account_form.initial.username }}>
+    <input type="text" name="first_name" id="inputFirstname" class="form-control" placeholder="First Name" required value={{ account_form.initial.first_name }}>
+    <input type="text" name="last_name" id="inputLastname" class="form-control" placeholder="Last Name" required value={{ account_form.initial.last_name }}>
+    <input type="number" name="age" id="inputAge" class="form-control" placeholder="Age" required value={{ account_form.initial.age }}>
+    <select title="gender" name="gender" id="inputGender" class="form-control"   required value={{ account_form.initial.gender }}>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
+    </select>
+
+
+
       {% for field in account_form %}
           {% for error in  field.errors %}
               <p style="color: red;">{{ error }}</p>
@@ -36,7 +47,7 @@
 <div class="container mt-4 p-4">
     <div class="row">
         <div class="blog-posts">
-            <h3 class="h3 mb-3 font-weight-normal">Blog Posts:</h3>
+            <h3 class="h3 mb-3 font-weight-normal">Blog Posts  <i class="fas fa-blog" aria-hidden="true"></i></h3>
                 {%  if blog_posts %}
                     <ul>
                         {% for blog in blog_posts %}

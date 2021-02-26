@@ -11,7 +11,7 @@ def registration_view(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            email = form.cleaned_data['email']
+            email = form.cleaned_data['email'].lower()
             raw_password = form.cleaned_data['password1']
             user.set_password(raw_password)
             user.save()
@@ -81,6 +81,10 @@ def edit_account_view(request):
             form.initial = {
                 'email': request.POST['email'],
                 'username': request.POST['username'],
+                'first_name': request.POST['first_name'],
+                'last_name': request.POST['last_name'],
+                'age': request.POST['age'],
+                'gender': request.POST['gender'],
             }
             form.save()
             context['success_message'] = 'Updated'
@@ -89,6 +93,11 @@ def edit_account_view(request):
             initial={
                 'email': request.user.email,
                 'username': request.user.username,
+                'first_name': request.user.first_name,
+                'last_name': request.user.last_name,
+                'age': request.user.age,
+                'gender': request.user.gender,
+
             }
         )
     context['account_form'] = form
