@@ -5,7 +5,7 @@
     Also there's API for the project using REST Framework.
     using django framework as back-end.
 
-[operations](#website-sections)
+[Operations](#website-sections)
 
 
         1- Building a custom User and Admin panel for Register, update, authenticate, delete users. 
