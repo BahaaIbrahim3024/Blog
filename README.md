@@ -39,7 +39,7 @@
 
       in DB section for Sqlite Db , so you can run it on windows OS.
  
-#website-sections
+# website-sections
 ## Home Page 
     - go to (http://127.0.0.1:8000/) "Link".
 ![Home1](https://user-images.githubusercontent.com/29886682/109367788-bbc03080-789f-11eb-9966-e1c2ffd26952.png)
