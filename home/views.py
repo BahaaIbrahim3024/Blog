@@ -36,3 +36,7 @@ def home_screen_view(request):
     context['posts'] = posts
 
     return render(request, 'home/home.html', context)
+
+
+def api_view(request):
+    return render(request, 'home/api.html', {})

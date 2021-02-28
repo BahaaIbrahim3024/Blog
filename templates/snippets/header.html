@@ -22,10 +22,12 @@
   <nav class="my-2 my-md-0 me-md-3">
       {% if request.user.is_authenticated %}
           <a class="p-2 text-dark" href="{% url 'home'%}" style="text-decoration: none;"><i class="fas fa-home" aria-hidden="true"></i>  Home</a>
+          <a class="p-2 text-dark" href="{% url 'home:api'  %}" style="text-decoration: none;"><i class="fas fa-ankh"></i>  API</a>
         <a class="p-2 text-dark" href="{% url 'account:update' %}" style="text-decoration: none;"><i class="fas fa-user-ninja" aria-hidden="true"></i>   Account</a>
         <a class="p-2 text-dark" href="{% url 'account:logout' %}" style="text-decoration: none;"><i class="fas fa-power-off" aria-hidden="true"></i>  Logout</a>
       {% else %}
           <a class="p-2 text-dark" href="{% url 'home'%}" style="text-decoration: none;"> <i class="fas fa-home" aria-hidden="true"></i>  Home</a>
+          <a class="p-2 text-dark" href="{% url 'home:api'  %}" style="text-decoration: none;"><i class="fas fa-ankh"></i>  API</a>
           <a class="p-2 text-dark" href="{% url 'account:login' %}" style="text-decoration: none;"><i class="fas fa-unlock-alt" aria-hidden="true"></i>  Login</a>
           <a class="btn btn-outline-primary" href="{% url 'account:register' %}" style="text-decoration: none;"><i class="fas fa-user-plus" aria-hidden="true"></i>  Register</a>
       {% endif %}

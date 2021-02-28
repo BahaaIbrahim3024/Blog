@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+<style type="text/css">
+	.card{
+		background-color: #fff;
+		padding:20px;
+	}
+	.rounded {
+	  border-radius: 50px;
+	  background: #fff;
+	  padding:20px;
+	  border: 1px solid #BEBEBE;
+	}
+
+</style>
+
+
+<div class="row">
+	<div class="col-lg-9 offset-lg-1">
+		<div class="card">
+
+			<!-- Overview -->
+			<h3>Overview</h3>
+			<hr>
+			<br>
+			<h6>Introduction</h6>
+			<br>
+			<p>This Section offers you Tutorial for operations of Rest-API.</p>
+			<p>The API is designed to provide URL endpoints for some of operations.</p>
+			<p>Here are the courses that use this API:</p>
+
+
+			<br><br>
+
+			<h6>Using the REST API at Blog project:</h6>
+			<br>
+			<p>You'll notice all the requests below require an authentication token. That's how users are authenticated from the mobile app. To validate your authentication tokens:</p>
+			<br>
+
+			<br>
+			<h6>How to Obtain an Authentication Token:</h6>
+			<br>
+			<p>See the section below: <a href="#obtaining-an-authentication-token">Obtaining an Authentication Token</a></p>
+			<br><br>
+			<!-- end Overview -->
+
+
+			<!-- Documentation -->
+			<h3>Documentation</h3>
+			<hr>
+			<br>
+
+			<!-- Obtaining an Authentication token -->
+			<h6 id="obtaining-an-authentication-token">Obtaining an Authentication Token</h6>
+                <p> There're 2 ways to generate Authentication Token :</p>
+			<div class="p-4">
+                <p>1- By Creating (Register) a new account</p>
+				<p>Request: POST</p>
+
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/account/register
+					</code>
+				</div>
+				<br>
+				<p>Params:</p>
+				<div class="code-card">
+					<p>email</p>
+                    <p>username</p>
+                    <p>first_name</p>
+                    <p>last_name</p>
+                    <p>age</p>
+                    <p>gender</p>
+					<p>password (Your password)</p>
+                    <p>password2 (retype your password to confirm it)</p>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"response": "Successfully registered anew user.",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"email": "apiTest@yahoo.com",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"username": "apiuser",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"pk": 1,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"token": "9720ee3080198d3c617bd61d5123bb3d6b3e332d"<br>
+						}<br>
+					</code>
+				</div>
+			</div>
+			<br>
+
+            <div class="p-4">
+                <p>2- By Login to your account</p>
+				<p>Request: POST</p>
+
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/account/login
+					</code>
+				</div>
+				<br>
+				<p>Params:</p>
+				<div class="code-card">
+					<p>username (Enter your login <strong>email</strong>)</p>
+					<p>password (Your password)</p>
+				</div>
+				<p><small>No that's not a typo above. The param is <strong>username</strong> but you use your <strong>email.</strong></small></p>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"response": "Successfully authenticated.",<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"pk": 1,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"email": "apiTest@yahoo.com",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"token": "9720ee3080198d3c617bd61d5123bb3d6b3e332d"<br>
+						}<br>
+					</code>
+				</div>
+			</div>
+			<br>
+
+			<!-- End Obtaining an Authentication token  -->
+
+			<!-- Creating a blog post -->
+			<h6 id="creating-a-blog-post">Creating a Blog Post</h6>
+			<div class="p-4">
+				<p>Request: POST</p>
+				<p>Headers:</p>
+				<div class="code-card">
+					<code>
+						Authorization: Token &lt;token&gt;
+					</code>
+                    <p>Make sure that only user (Authorized user) can create posts so you must attached your token to header in the request</p>
+				</div>
+				<br>
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/blog/create
+					</code>
+				</div>
+				<br>
+				<p>Params:</p>
+				<div class="code-card">
+					<p>title (text)</p>
+					<p>body (text)</p>
+					<p>image (file)</p>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"response": "created",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"title": "Test Title!",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"body": "this is  new body for test \ncool.\nstuff.",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"image": "/media/blog/1/New_Title.png",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"date_updated": "2021-02-27T15:19:33.095626Z",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"username": "apiuser"<br>
+						}
+					</code>
+				</div>
+
+
+			</div>
+			<br>
+			<!-- End Creating a blog post -->
+
+
+			<!-- Viewing a specific blog post -->
+			<h6 id="viewing-a-specific-blog-post">Viewing a Details for Blog Post</h6>
+			<div class="p-4">
+				<p>Request: GET</p>
+				<p>Headers:</p>
+				<div class="code-card">
+					<code>
+						Authorization: Token &lt;token&gt;
+					</code>
+				</div>
+				<br>
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/blog/&lt;slug&gt;/
+					</code>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"title": "Variance and Bias",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"body": "this post about Variance and Bias and the relationship with Overfitting and Underfitting.",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"image": "/media/blog/1/newPic.png",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"date_updated": "2021-02-27T15:20:00.095626Z",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"username": "apiuser"<br>
+						}
+					</code>
+				</div>
+			</div>
+			<br>
+			<!-- End Viewing a specific blog post  -->
+
+
+
+			<!-- Updating a specific blog post -->
+			<h6 id="updating-a-specific-blog-post">Updating (edit) a Specific Blog Post</h6>
+			<div class="p-4">
+				<p>Request: PUT</p>
+				<p>Headers:</p>
+				<div class="code-card">
+					<code>
+						Authorization: Token &lt;token&gt;
+					</code>
+                    <p>Make sure that only the owner of this post who is editing the post so you must attached your token to header in the request</p>
+				</div>
+				<br>
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/blog/&lt;slug&gt;/update
+					</code>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"response": "Update Successful"<br>
+						}<br>
+					</code>
+				</div>
+			</div>
+			<br>
+			<!-- End Updating a specific blog post  -->
+
+
+			<!-- Deleting a specific blog post -->
+			<h6 id="deleting-a-specific-blog-post">Deleting (remove) a Specific Blog Post</h6>
+			<div class="p-4">
+				<p>Request: DELETE</p>
+				<p>Headers:</p>
+				<div class="code-card">
+					<code>
+						Authorization: Token &lt;token&gt;
+					</code>
+				</div>
+				<br>
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/blog/&lt;slug&gt;/delete
+					</code>
+                    <p>Make sure that only the owner of this post who can delete the post so you must attached your token to header in the request</p>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"response": "Deleted Successful"<br>
+						}<br>
+					</code>
+				</div>
+			</div>
+			<br>
+			<!-- End Deleting a specific blog post  -->
+
+			<!-- List Blog Posts (Pagination, Search and Ordering) -->
+			<h6 id="list-blog-posts">List Blog Posts (Pagination, Search and Ordering)</h6>
+			<div class="p-4">
+				<p>Request: GET</p>
+				<p>Headers:</p>
+				<div class="code-card">
+					<code>
+						Authorization: Token &lt;token&gt;
+					</code>
+				</div>
+				<br>
+				<p>Url:</p>
+				<div class="code-card">
+					<code>
+						http://127.0.0.1:8000/api/blog/list/?search=&lt;<strong>query</strong>&gt;&ordering=-date_updated&page=1
+					</code>
+				</div>
+				<br>
+				<p>Params:</p>
+				<div class="code-card">
+					<p>query (this will search the title and body of blog posts for a match)</p>
+					<p>ordering (Can use: title, body, username or date_updated)</p>
+					<p>page (results will be shown per page.)</p>
+				</div>
+				<br>
+				<p>Success Response:</p>
+				<div class="code-card">
+					<code>
+						{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"count": &lt;num_results&gt;,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"next": null,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"previous": null,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;"results": [<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "gfhhfghfgh",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"body": "fghgfhfghf",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"date_updated": "2021-02-27T21:43:56.452234Z",<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"username": "apiuser"<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+						}
+					</code>
+				</div>
+			</div>
+			<!-- End List Blog Posts (Pagination, Search and Ordering) -->
+
+			<br><br>
+			<!-- end Documentation -->
+
+		</div>
+	</div>
+
+	<div class="col-lg-2">
+		<div class="card">
+			<h5>Navigation:</h5>
+			<br>
+			<ul class="list-group">
+				<a href="#obtaining-an-authentication-token"><li class="list-group-item p-1"><small>Obtaining an Authentication Token</small></li></a>
+				<a href="#creating-a-blog-post"><li class="list-group-item p-1"><small>Creating a Blog Post</small></li></a>
+				<a href="#viewing-a-specific-blog-post"><li class="list-group-item p-1"><small>Viewing a Specific Blog Post</small></li></a>
+				<a href="#updating-a-specific-blog-post"><li class="list-group-item p-1"><small>Updating a Specific Blog Post</small></li></a>
+				<a href="#deleting-a-specific-blog-post"><li class="list-group-item p-1"><small>Deleting a Specific Blog Post</small></li></a>
+				<a href="#list-blog-posts"><li class="list-group-item p-1"><small>List Blog Posts</small></li></a>
+
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+<!-- End Body -->
+
+
+
+
+
+{% endblock %}
