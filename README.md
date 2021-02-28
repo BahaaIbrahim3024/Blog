@@ -5,7 +5,7 @@
     Also there's API for the project using REST Framework.
     using django framework as back-end.
 
-## * [Operations](#Website-Sections)
+## * [Operations](#website-sections)
         1- Building a custom User and Admin panel for Register, update, authenticate, delete users. 
             I- Also change password & reset it.
             II- User authentication via Django "TokenAuthentication".
@@ -37,7 +37,7 @@
 
       in DB section for Sqlite Db , so you can run it on windows OS.
  
-#Website-Sections
+#website-sections
 ## Home Page 
     - go to (http://127.0.0.1:8000/) "Link".
 ![Home1](https://user-images.githubusercontent.com/29886682/109367788-bbc03080-789f-11eb-9966-e1c2ffd26952.png)
