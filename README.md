@@ -100,7 +100,32 @@
 ![CreatedPosts](https://user-images.githubusercontent.com/29886682/109367781-b6fb7c80-789f-11eb-9f18-e6fc8c64f404.png)
 
  
- ## 10- REST API Operations ( for account & posts )
+ ## 10- REST API Operations ( for account & posts ) 
+ * This Section for developers to test api on local machines
+ * You'll find all details mentained in the site for how to use the api and links
+ 
+1- For account Operations
+
+    - Register: POST request [link] (http://127.0.0.1:8000/api/account/register)
+    - Login: POST request [link] (http://127.0.0.1:8000/api/account/login)
+    - Get Details: GET request [link] (http://127.0.0.1:8000/api/account/detail/)
+    - Update: PUT request [link] (http://127.0.0.1:8000/api/account/update)
+    - Delete: DELETE request [link] (http://127.0.0.1:8000/api/account/delete)
+    - Check if the account exist: GET request [link] (http://127.0.0.1:8000/api/account/check_if_account_exist/)
+    - Change password: PUT request [link] (http://127.0.0.1:8000/api/account/change_password/)
+
+2- For post Operations
+
+    - Create new post: POST request [link] (http://127.0.0.1:8000/api/blog/create)
+    - Get Details: GET request [link] (http://127.0.0.1:8000/api/blog/<slug>/)
+    - Update: PUT request [link] (http://127.0.0.1:8000/api/blog/<slug>/update)
+    - Delete: DELETE request [link] (http://127.0.0.1:8000/api/blog/<slug>/delete)
+    - Pagination , listing and ordering: GET request [link] (http://127.0.0.1:8000/list)
+    - Find the author of a post: GET request [link] (http://127.0.0.1:8000/api/blog/<slug>/is_author)
+    
+ 
+ Thanks.
+
  
 
  
